@@ -8,7 +8,7 @@
 		<!-- Bootstrap CSS -->
 		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
 
-		<title>Hello, world!</title>
+		<title>Blackjack</title>
 		<style>
 			.bd-placeholder-img {
 				font-size: 1.125rem;
@@ -30,6 +30,29 @@
 			.subrayado {
 				text-decoration: line-through;
 			}
+			.jumbotron {
+				height: 450px;
+  		  background-color: #04B431;
+			}
+			.carta {
+				display: inline-block;
+				padding: 7px;
+				position: relative;
+				border: 2px solid black;
+				top: 290px;
+				border-radius: 5px;
+				background-color: #DDD;
+			}
+			.carta p {
+				display: inline-block;
+				width: 20px;
+				font-size: 25px;
+				font-weight: 600;
+			}
+			.carta img {
+				display: inline-block;
+    		width: 25px;
+			}
 		</style>
 	</head>
 	<body>
@@ -39,21 +62,28 @@
 
 		<div class="container">
 			<div class="row">
-				<div class="col-md-3 col-sm-1">
+				<div class="col-md-2 col-sm-1">
 					<div class="card">
 						<div class="card-header">
-							<p>Siguiente Jugador</p>
+							<p></p>
 						</div>
 						<div class="card-body">
 						</div>
 					</div>
 				</div>
-				<div class="col-md-6 col-sm-10">
+				<div class="col-md-8 col-sm-10">
 					<div class="jumbotron">
-						<p>sdlkjsdlkj</p>
+						<div class="carta">
+							<p>4</p>
+							<img src="img/diamond.png" alt="4 diamantes">
+						</div>
+						<div class="carta">
+							<p>K</p>
+							<img src="img/picas.png" alt="rey picas">
+						</div>
 					</div>
 				</div>
-				<div class="col-md-3 col-sm-1">
+				<div class="col-md-2 col-sm-1">
 					<div class="card">
 						<div class="card-header">
 						</div>
