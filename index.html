@@ -10,6 +10,10 @@
 
 		<title>Blackjack</title>
 		<style>
+			.container {
+				top: 300px;
+    		position: relative;
+			}
 			.bd-placeholder-img {
 				font-size: 1.125rem;
 				text-anchor: middle;
@@ -31,7 +35,7 @@
 				text-decoration: line-through;
 			}
 			.jumbotron {
-				height: 450px;
+				height: 400px;
   		  background-color: #04B431;
 			}
 			.carta {
@@ -39,9 +43,10 @@
 				padding: 7px;
 				position: relative;
 				border: 2px solid black;
-				top: 290px;
+				top: 250px;
 				border-radius: 5px;
 				background-color: #DDD;
+				margin-right: 10px;
 			}
 			.carta p {
 				display: inline-block;
@@ -88,7 +93,7 @@
 				<div class="col-md-2 col-sm-1">
 					<div class="card">
 						<div class="card-header">
-							<button type="button" class="btn btn-primary">Robar</button>
+							<button type="button" id="robar-carta" class="btn btn-primary">Robar</button>
 						</div>
 						<div class="card-body">
 						</div>
@@ -173,5 +178,7 @@
 		// agregar cartas iniciales a la mesa
 		dibujar_carta(carta1);
 		dibujar_carta(carta2);
+
+		// robar carta
 	</script>
 </html>
