@@ -1,0 +1,5 @@
+A-Treb, 7-Diam, 5-Diam
+23 - 13  // valore posibles
+
+Siempre que robe una carta nueva,
+voy a calcular todas las posibilidades, a ver si alguna no pierde

@@ -36,9 +36,8 @@
 				text-decoration: line-through;
 			}
 			.jumbotron {
-				
-				height: 450px;
-  		  		background-color: #04B431;
+				height: 400px;
+  		 		background-color: #04B431;
 			}
 			.carta {
 				display: inline-block;
@@ -92,7 +91,6 @@
 					</div>
 				</div>
 			</div>
-
 		</div>
 
 		<!-- Modal -->
@@ -115,7 +113,6 @@
 				</div>
 			</div>
 		</div>
-
 	</body>
 	<script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
 	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
@@ -146,7 +143,27 @@
 				return parseInt(carta.rank);
 			}
 		}
+		
+		// Una mano es perdedora si todas sus posibilidades son perdedoras
+		function verificar_si_pierde(mano) {
+			var puntaje_parcial = 0;
+			for (var i=0; i<mano.length; i++) {
+				puntaje_parcial = puntaje_parcial + valor_carta(mano[i]);
+			}
 
+			if (puntaje_parcial <= 21) {
+				return false; // jugador aun no pierde
+			} else {
+				return true; // jugador ya perdió
+			}
+		}
+
+		/*
+		<div class="carta">
+			<p>4</p>
+			<img src="img/diamond.png" alt="4 diamantes">
+		</div>
+		*/
 		function dibujar_carta(carta) {
 			var parrafo = '';
 			if (carta.rank == 'ace' || carta.rank == 'king' ||
@@ -171,10 +188,11 @@
 			$('.jumbotron').append(div_carta);
 		}
 
-		function iniciar_juego() {
-			var deck = new Deck();
-			var mano = [];  // cartas en la mano del jugador
+		// Variables GLOBALES
+		var deck = new Deck();
+		var mano = [];  // cartas en la mano del jugador
 
+		function iniciar_juego() {
 			var carta1 = deck.draw();
 			var carta2 = deck.draw();
 
@@ -184,34 +202,22 @@
 			// agregar cartas iniciales a la mesa
 			dibujar_carta(carta1);
 			dibujar_carta(carta2);
-		};
-
+		}
 		iniciar_juego();
 
-		// puntaje parcial del jugador
-		var puntaje = valor_carta(carta1) + valor_carta(carta2);
-
 		// robar carta
-		function robar_carta (){
-			$('#robar_carta').on('click', function(){
-				//sacar carta nueva
-				div_carta(cartanew);
-				//meter nueva carta al mazo
-				mano.push(cartanew);
-				//dibujar carta nueva
-				dibujar_carta(cartanew);
-				//actualizar puntaje
-				var puntaje2 = puntaje + valor_carta(cartanew);
-				
-				//chequear si pierdo
-				if (chequear_perdedor(mano)){
-					alert('Perdiste');
-				};
-			});
-		
-		}
+		$('#robar-carta').on('click', function() {
+			// sacar carta nueva del maso
+			var carta_nueva = deck.draw();
+			// meterla a la mano
+			mano.push(carta_nueva);
+			// dibujar carta nueva
+			dibujar_carta(carta_nueva);
 
-		
-
+			// chequear si perdió el jugador
+			if (verificar_si_pierde(mano)) {
+				alert('Perdiste el juego');
+			}
+		});
 	</script>
 </html>
