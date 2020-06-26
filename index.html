@@ -139,6 +139,20 @@
 				return parseInt(carta.rank);
 			}
 		}
+		
+		// Una mano es perdedora si todas sus posibilidades son perdedoras
+		function verificar_si_pierde(mano) {
+			var puntaje_parcial = 0;
+			for (var i=0; i<mano.length; i++) {
+				puntaje_parcial = puntaje_parcial + valor_carta(mano[i]);
+			}
+
+			if (puntaje_parcial <= 21) {
+				return false; // jugador aun no pierde
+			} else {
+				return true; // jugador ya perdió
+			}
+		}
 
 		/*
 		<div class="carta">
@@ -170,21 +184,22 @@
 			$('.jumbotron').append(div_carta);
 		}
 
+		// Variables GLOBALES
 		var deck = new Deck();
 		var mano = [];  // cartas en la mano del jugador
 
-		var carta1 = deck.draw();
-		var carta2 = deck.draw();
+		function iniciar_juego() {
+			var carta1 = deck.draw();
+			var carta2 = deck.draw();
 
-		mano.push(carta1);
-		mano.push(carta2);
+			mano.push(carta1);
+			mano.push(carta2);
 
-		// puntaje parcial del jugador
-		var puntaje = valor_carta(carta1) + valor_carta(carta2);
-		
-		// agregar cartas iniciales a la mesa
-		dibujar_carta(carta1);
-		dibujar_carta(carta2);
+			// agregar cartas iniciales a la mesa
+			dibujar_carta(carta1);
+			dibujar_carta(carta2);
+		}
+		iniciar_juego();
 
 		// robar carta
 		$('#robar-carta').on('click', function() {
@@ -194,11 +209,9 @@
 			mano.push(carta_nueva);
 			// dibujar carta nueva
 			dibujar_carta(carta_nueva);
-			// actualiza el puntaje
-			puntaje = puntaje + valor_carta(carta_nueva);
 
-			// chequear si perdio el jugador
-			if (puntaje > 21) {
+			// chequear si perdió el jugador
+			if (verificar_si_pierde(mano)) {
 				alert('Perdiste el juego');
 			}
 		});
