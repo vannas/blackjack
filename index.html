@@ -11,7 +11,7 @@
 		<title>Blackjack</title>
 		<style>
 			.container {
-				top: 300px;
+				top: 100px;
     		position: relative;
 			}
 			.bd-placeholder-img {
@@ -93,9 +93,10 @@
 				<div class="col-md-2 col-sm-1">
 					<div class="card">
 						<div class="card-header">
-							<button type="button" id="robar-carta" class="btn btn-primary">Robar</button>
+							<button type="button" id="robar-carta" class="btn btn-primary btn-block">Robar</button>
 						</div>
 						<div class="card-body">
+							<button type="button" class="btn btn-warning btn-block">Plantarse</button>
 						</div>
 					</div>
 				</div>
@@ -131,7 +132,7 @@
 
 		function valor_carta(carta) {
 			if (carta.rank == 'ace') {
-				return 1;
+				return 11;
 			} else if (carta.rank == 'king' ||carta.rank == 'queen' || carta.rank == 'jack') {
 				return 10;
 			} else {
@@ -139,6 +140,12 @@
 			}
 		}
 
+		/*
+		<div class="carta">
+			<p>4</p>
+			<img src="img/diamond.png" alt="4 diamantes">
+		</div>
+		*/
 		function dibujar_carta(carta) {
 			var parrafo = '';
 			if (carta.rank == 'ace' || carta.rank == 'king' ||
@@ -180,5 +187,20 @@
 		dibujar_carta(carta2);
 
 		// robar carta
+		$('#robar-carta').on('click', function() {
+			// sacar carta nueva del maso
+			var carta_nueva = deck.draw();
+			// meterla a la mano
+			mano.push(carta_nueva);
+			// dibujar carta nueva
+			dibujar_carta(carta_nueva);
+			// actualiza el puntaje
+			puntaje = puntaje + valor_carta(carta_nueva);
+
+			// chequear si perdio el jugador
+			if (puntaje > 21) {
+				alert('Perdiste el juego');
+			}
+		});
 	</script>
 </html>
