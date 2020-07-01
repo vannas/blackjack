@@ -127,17 +127,16 @@
 				<div class="modal-dialog">
 					<div class="modal-content">
 						<div class="modal-header">
-							<h5 class="modal-title" id="staticBackdropLabel">Ganaste!!!</h5>
-							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<h5 class="modal-title" id="staticBackdropLabel">Fin del Juego!</h5>
+							<button type="button" class="close btn-danger" data-dismiss="modal" aria-label="Close">
 								<span aria-hidden="true">&times;</span>
 							</button>
 						</div>
 						<div class="modal-body">
-							Felicidades al Jugador <span id="jugador-ganador">O</span> por ganar.
+							
 						</div>
 						<div class="modal-footer">
-							<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-							<button type="button" class="btn btn-primary">Understood</button>
+							<button type="button" class="btn btn-danger" data-dismiss="modal">Aceptar</button>
 						</div>
 					</div>
 				</div>
@@ -225,26 +224,34 @@
 				dibujar_carta(carta2);
 
 				const puntaje = obtener_puntaje(mano);
-				debugger
 				$('#pje').html(puntaje);
+
+				if(puntaje == 21){
+					$('.modal-body').html('Felicidades Ganador! Has obtenido BLACKJACK!');
+					$('#modal-ganador').modal('show');
+				};
 			}
 
 			iniciar_juego();
 
 			// robar carta
 			$('#robar_carta').on('click', function() {
-				var carta_nueva = deck.draw()
+				var carta_nueva = deck.draw();
 				// meterla a la mano
-				mano.push(carta_nueva)
-				// dibujar carta nueva
-				dibujar_carta(carta_nueva)
-				var puntaje_parcial = obtener_puntaje(mano)
-				$('#ptje_parcial').html(puntaje_parcial)
+				mano.push(carta_nueva);
+				//	 dibujar carta nueva
+				dibujar_carta(carta_nueva);
+				var puntaje = obtener_puntaje(mano);
+				$('#pje').html(puntaje);
 
 				// chequear si perdió el jugador
-				if (puntaje_parcial > 21) {
-					alert('Perdiste el juego')
-				}
+				if (puntaje > 21) {
+					$('.modal-body').html('Lo siento, la casa gana. Has perdido');
+					$('#modal-ganador').modal('show');
+				} else if (puntaje == 21){
+					$('.modal-body').html('Felicidades Ganador! Has obtenido BLACKJACK!');
+					$('#modal-ganador').modal('show');
+				};
 			});
 
 			
